@@ -1,0 +1,165 @@
+/* N2 Toolkit — base, tokens de tema e layout */
+:root {
+  --bg: #f5f6fb;
+  --surface: #ffffff;
+  --surface-2: #eef0f7;
+  --border: #e2e5ef;
+  --text: #151a2d;
+  --muted: #646c84;
+  --accent: #4f46e5;
+  --accent-2: #7c3aed;
+  --accent-text: #ffffff;
+  --accent-soft: #ecebff;
+  --ok: #12804a;
+  --ok-soft: #dff6e9;
+  --bad: #c7352b;
+  --bad-soft: #fde6e3;
+  --warn: #8f5f00;
+  --warn-soft: #fff2cc;
+  --chip-s: 85%; --chip-l: 94%;
+  --shadow: 0 1px 2px rgba(20, 25, 50, .05), 0 4px 14px rgba(20, 25, 50, .05);
+  --shadow-lg: 0 12px 40px rgba(20, 25, 50, .18);
+  --radius: 14px;
+  --radius-sm: 9px;
+  --mono: ui-monospace, "Cascadia Code", "JetBrains Mono", Consolas, Menlo, monospace;
+  --sidebar-w: 244px;
+}
+:root[data-theme="dark"] {
+  --bg: #0c0f18;
+  --surface: #151926;
+  --surface-2: #1e2333;
+  --border: #272d40;
+  --text: #e7e9f3;
+  --muted: #959cb5;
+  --accent: #8b85ff;
+  --accent-2: #b78bff;
+  --accent-text: #0c0f18;
+  --accent-soft: #23234a;
+  --ok: #4ccb8f;
+  --ok-soft: #12301f;
+  --bad: #ff8078;
+  --bad-soft: #3d1c1a;
+  --warn: #e8b84a;
+  --warn-soft: #362b0e;
+  --chip-s: 45%; --chip-l: 20%;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .3);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, .55);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14.5px/1.55 "Inter", "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+h1, h2, h3 { margin: 0 0 8px; line-height: 1.25; letter-spacing: -.01em; }
+h1 { font-size: 22px; }
+h2 { font-size: 15px; }
+h3 { font-size: 14px; }
+p { margin: 0 0 8px; }
+a { color: var(--accent); text-decoration: none; }
+.muted { color: var(--muted); }
+.small { font-size: 12.5px; }
+.mono { font-family: var(--mono); }
+::selection { background: var(--accent-soft); }
+* { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+
+/* Layout */
+#app { display: flex; min-height: 100%; }
+#sidebar {
+  width: var(--sidebar-w);
+  flex: none;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 16px 12px;
+}
+#main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+#header {
+  position: sticky; top: 0; z-index: 5;
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 24px;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+#header .spacer { flex: 1; }
+#view { padding: 24px; max-width: 1360px; width: 100%; margin: 0 auto; }
+#overlay, #menu-btn, #bottomnav { display: none; }
+
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; padding: 2px 8px 14px; letter-spacing: .3px; }
+.brand .logo {
+  width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; font-size: 13px;
+}
+.nav-group { font-size: 11px; text-transform: uppercase; color: var(--muted); padding: 16px 10px 6px; letter-spacing: .8px; font-weight: 600; }
+.nav-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 10px; border-radius: var(--radius-sm);
+  color: var(--text); white-space: nowrap; transition: background .12s;
+}
+.nav-link .i { width: 22px; text-align: center; }
+.nav-link:hover { background: var(--surface-2); }
+.nav-link.active { background: var(--accent-soft); color: var(--accent); font-weight: 650; }
+
+.search-trigger {
+  display: flex; align-items: center; gap: 10px;
+  border: 1px solid var(--border); background: var(--surface); color: var(--muted);
+  border-radius: 999px; padding: 8px 14px; cursor: pointer; font: inherit;
+  width: 100%; max-width: 440px; box-shadow: var(--shadow); transition: border-color .12s;
+}
+.search-trigger:hover { border-color: var(--accent); }
+.search-trigger .lbl { flex: 1; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+kbd {
+  font: 11px var(--mono); border: 1px solid var(--border); border-radius: 6px;
+  padding: 2px 6px; background: var(--surface-2); color: var(--muted); white-space: nowrap;
+}
+
+/* Cabeçalho de cada tela */
+.page-head { display: flex; gap: 14px; align-items: center; margin-bottom: 20px; }
+.page-head h1 { margin: 0; }
+.page-head p { margin: 2px 0 0; }
+.chip-ico {
+  width: 46px; height: 46px; flex: none; border-radius: 13px; display: grid; place-items: center; font-size: 22px;
+  background: hsl(var(--h, 245) var(--chip-s) var(--chip-l));
+}
+
+/* Tablet / celular */
+@media (max-width: 900px) {
+  #sidebar {
+    position: fixed; z-index: 20; left: 0; top: 0;
+    transform: translateX(-100%); transition: transform .18s; box-shadow: var(--shadow-lg);
+  }
+  body.menu-open #sidebar { transform: none; }
+  body.menu-open #overlay { display: block; position: fixed; inset: 0; background: rgba(0, 0, 0, .45); z-index: 15; }
+  #menu-btn { display: inline-flex; }
+  #header { padding: 10px 14px; }
+  #view { padding: 16px 14px; }
+  .search-trigger kbd { display: none; }
+}
+@media (max-width: 640px) {
+  #view { padding-bottom: 84px; }
+  #toast-root { bottom: 76px !important; }
+  #bottomnav {
+    display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 12;
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+  }
+  #bottomnav a, #bottomnav button {
+    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 1px;
+    border: 0; background: none; color: var(--muted); font: inherit; font-size: 11px; padding: 4px 0; cursor: pointer; border-radius: 10px;
+  }
+  #bottomnav .i { font-size: 19px; }
+  #bottomnav .active { color: var(--accent); font-weight: 650; }
+}
+
+/* header nunca estoura a largura */
+#header .search-trigger { flex: 1 1 200px; min-width: 0; }
+@media (max-width: 640px) { #header .spacer { display: none; } #header { gap: 4px; } }

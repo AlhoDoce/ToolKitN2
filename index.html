@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>N2 Toolkit</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <div id="app">
+    <aside id="sidebar"></aside>
+    <div id="overlay"></div>
+    <div id="main">
+      <header id="header"></header>
+      <main id="view"></main>
+    </div>
+  </div>
+  <div id="modal-root"></div>
+  <div id="toast-root"></div>
+
+  <!-- Núcleo (ordem importa: app -> storage -> ferramentas -> navigation) -->
+  <script src="js/app.js"></script>
+  <script src="js/storage.js"></script>
+
+  <!-- Ferramentas: cada arquivo chama N2.register({...}). Para adicionar uma nova
+       ferramenta, crie um arquivo em /js e inclua a tag <script> aqui. -->
+  <script src="js/pages.js"></script>
+  <script src="js/notes.js"></script>
+  <script src="js/ocr.js"></script>
+  <script src="js/utilities.js"></script>
+  <script src="js/ticket-analyzer.js"></script>
+  <script src="js/logistics.js"></script>
+  <script src="js/checklists.js"></script>
+  <script src="js/templates.js"></script>
+  <script src="js/knowledge.js"></script>
+  <script src="js/json-tools.js"></script>
+  <script src="js/xml-tools.js"></script>
+  <script src="js/compare.js"></script>
+  <script src="js/payload.js"></script>
+
+  <script src="js/navigation.js"></script>
+</body>
+</html>
